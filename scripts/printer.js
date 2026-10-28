@@ -140,14 +140,16 @@ async function generateLabelPackets(code, labelLines) {
   const verticalOffset = 10;
   context.drawImage(qrImage, -labelWidth / 2 + 15, -labelHeight / 2 + 18 + verticalOffset, qrSize, qrSize);
   context.fillStyle = "black";
-  context.font = "bold 24px Arial";
+  context.font = "bold 30px Arial";
   context.textAlign = "left";
   context.textBaseline = "middle";
+  const textX = -labelWidth / 2 + qrSize + 35;
+  const maxTextWidth = labelWidth / 2 - textX - 5;
   if (labelLines.length > 1) {
-    context.fillText(labelLines[0], -labelWidth / 2 + qrSize + 30, -15 + verticalOffset);
-    context.fillText(labelLines[1], -labelWidth / 2 + qrSize + 30, 15 + verticalOffset);
+    context.fillText(labelLines[0], textX, -18 + verticalOffset, maxTextWidth);
+    context.fillText(labelLines[1], textX, 18 + verticalOffset, maxTextWidth);
   } else {
-    context.fillText(labelLines[0], -labelWidth / 2 + qrSize + 30, verticalOffset);
+    context.fillText(labelLines[0], textX, verticalOffset, maxTextWidth);
   }
   context.restore();
 

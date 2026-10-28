@@ -2,7 +2,7 @@ import {
   connectPrinterFromButton,
   loadAuthorizedPrinter,
   printLabel,
-} from "./printer.js?v=connection-fix-1";
+} from "./printer.js?v=text-size-1";
 
 const printButton = document.getElementById("print-button");
 const status = document.getElementById("status");
