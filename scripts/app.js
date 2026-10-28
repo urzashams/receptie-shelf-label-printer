@@ -104,7 +104,7 @@ printButton.addEventListener("click", async () => {
       await printLabel(label.code, label.lines, setStatus);
       sent++;
       if (index + 1 < labels.length) {
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        await new Promise((resolve) => setTimeout(resolve, 2500));
       }
     }
     setStatus(labels.length === 1
