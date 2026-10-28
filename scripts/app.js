@@ -1,8 +1,8 @@
 import {
   connectPrinterFromButton,
+  loadAuthorizedPrinter,
   printLabel,
-  reconnectAuthorizedPrinter,
-} from "./printer.js";
+} from "./printer.js?v=connection-fix-1";
 
 const printButton = document.getElementById("print-button");
 const status = document.getElementById("status");
@@ -118,5 +118,5 @@ printButton.addEventListener("click", async () => {
 
 renderSelections();
 printButton.disabled = true;
-await reconnectAuthorizedPrinter(setStatus);
+await loadAuthorizedPrinter();
 renderSelections();

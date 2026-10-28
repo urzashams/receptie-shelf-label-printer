@@ -65,18 +65,15 @@ async function connectToDevice(device, setStatus) {
   }
 }
 
-export async function reconnectAuthorizedPrinter(setStatus) {
+export async function loadAuthorizedPrinter() {
   if (!navigator.bluetooth?.getDevices) return false;
 
   try {
     const devices = await navigator.bluetooth.getDevices();
     authorizedPrinter = devices.find((device) => device.name?.startsWith("D")) || null;
-    if (!authorizedPrinter) return false;
-    return await connectToDevice(authorizedPrinter, setStatus);
+    return Boolean(authorizedPrinter);
   } catch {
-    if (authorizedPrinter) {
-      setStatus("Imprimanta nu este pregătită. Apasă PASTE pentru reconectare.");
-    }
+    authorizedPrinter = null;
     return false;
   }
 }
@@ -88,14 +85,29 @@ export function connectPrinterFromButton(setStatus) {
   if (isPrinterConnected()) return Promise.resolve(true);
   if (connectionPromise) return connectionPromise;
 
-  if (authorizedPrinter) return connectToDevice(authorizedPrinter, setStatus);
+  if (authorizedPrinter) {
+    return connectToDevice(authorizedPrinter, setStatus).catch((error) => {
+      authorizedPrinter = null;
+      characteristic = null;
+      printerDevice = null;
+      const detail = error?.message ? ` (${error.message})` : "";
+      throw new Error(`Reconectarea a eșuat${detail}. Apasă butonul din nou pentru a alege imprimanta.`);
+    });
+  }
 
-  // requestDevice must start directly from the PASTE button's user action.
+  // requestDevice must start directly from the user's print-button action.
   return navigator.bluetooth
     .requestDevice({ filters: PRINTER_FILTERS, optionalServices: OPTIONAL_SERVICES })
-    .then((device) => {
+    .then(async (device) => {
       authorizedPrinter = device;
-      return connectToDevice(device, setStatus);
+      try {
+        return await connectToDevice(device, setStatus);
+      } catch (error) {
+        authorizedPrinter = null;
+        characteristic = null;
+        printerDevice = null;
+        throw error;
+      }
     });
 }
 
