@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f4f6fa">
+    <title>Etichete pentru rafturi</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://unpkg.com/qrcode-generator@1.4.4/qrcode.js"></script>
+    <script type="module" src="./scripts/app.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Etichete pentru rafturi</h1>
+
+      <fieldset>
+        <legend>Rand</legend>
+        <div class="choices" data-group="row">
+          <button type="button" data-value="1">1</button>
+          <button type="button" data-value="2">2</button>
+          <button type="button" data-value="3">3</button>
+          <button type="button" data-value="4">4</button>
+          <button type="button" data-value="5">5</button>
+          <button type="button" data-value="6">6</button>
+          <button type="button" data-value="7">7</button>
+          <button type="button" data-value="8">8</button>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Deschidere</legend>
+        <div class="choices" data-group="opening">
+          <button type="button" data-value="1">1</button>
+          <button type="button" data-value="2">2</button>
+          <button type="button" data-value="3">3</button>
+          <button type="button" data-value="4">4</button>
+          <button type="button" data-value="5">5</button>
+          <button type="button" data-value="6">6</button>
+          <button type="button" data-value="7">7</button>
+          <button type="button" data-value="8">8</button>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Numar de polite</legend>
+        <p class="hint" id="shelf-hint">Alege numărul de polițe pentru care vrei etichete.</p>
+        <div class="choices" data-group="shelf">
+          <button type="button" data-value="1">1</button>
+          <button type="button" data-value="2">2</button>
+          <button type="button" data-value="3">3</button>
+          <button type="button" data-value="4">4</button>
+          <button type="button" data-value="5">5</button>
+          <button type="button" data-value="6">6</button>
+          <button type="button" data-value="7">7</button>
+          <button type="button" data-value="8">8</button>
+          <button type="button" data-value="9">9</button>
+          <button type="button" data-value="10">10</button>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Numar de cutii (optional)</legend>
+        <div class="choices" data-group="boxes">
+          <button type="button" data-value="none" aria-label="Fără cutii">Fără</button>
+          <button type="button" data-value="1">1</button>
+          <button type="button" data-value="2">2</button>
+          <button type="button" data-value="3">3</button>
+          <button type="button" data-value="4">4</button>
+          <button type="button" data-value="5">5</button>
+          <button type="button" data-value="6">6</button>
+          <button type="button" data-value="7">7</button>
+          <button type="button" data-value="8">8</button>
+          <button type="button" data-value="9">9</button>
+          <button type="button" data-value="10">10</button>
+          <button type="button" data-value="11">11</button>
+          <button type="button" data-value="12">12</button>
+        </div>
+      </fieldset>
+
+      <p class="summary" id="summary" aria-live="polite"></p>
+      <p id="status" role="status" aria-live="polite"></p>
+      <button id="print-button" type="button" disabled>Print</button>
+    </main>
+  </body>
+</html>
