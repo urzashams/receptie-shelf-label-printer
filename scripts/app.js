@@ -103,6 +103,9 @@ printButton.addEventListener("click", async () => {
       setStatus(`Se imprimă eticheta ${index + 1} din ${labels.length}...`);
       await printLabel(label.code, label.lines, setStatus);
       sent++;
+      if (index + 1 < labels.length) {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
     }
     setStatus(labels.length === 1
       ? "Eticheta a fost trimisă imprimantei."
